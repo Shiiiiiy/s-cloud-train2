@@ -9,6 +9,10 @@ public interface TrainFahrplanMapper {
 
     List<TrainFahrplan> findFahrplanList();
 
+
+    List<TrainFahrplan> findList();
+
+
     TrainFahrplan findFahrplanByCode(String trainCode);
 
     int insert(TrainFahrplan trainFahrplan);

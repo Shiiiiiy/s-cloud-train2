@@ -1,5 +1,10 @@
 package cn.lwf.framework.train.model;
 
+import cn.lwf.framework.train.task.TrainInitTask;
+import cn.lwf.framework.train.vo.TrainInfo;
+import cn.lwf.framework.train.vo.TrainInfoNew;
+import com.alibaba.fastjson.JSONObject;
+
 public class TrainFahrplan {
 
     private Long id; //编码
@@ -16,6 +21,19 @@ public class TrainFahrplan {
     private String trainNo; //车次编码',
     private String trainInfoUpdateTime; //车次时刻更新时间',
     private String createTime; //创建时间',
+
+
+    private TrainInfo trainInfoObject;
+
+    public TrainInfo getTrainInfoObject(){
+        if (trainInfoObject!=null){
+            return trainInfoObject;
+        }
+        this.trainInfoObject = JSONObject.parseObject(trainInfoNew,TrainInfo.class);
+        return trainInfoObject;
+    }
+
+
 
     public Long getId() {
         return id;

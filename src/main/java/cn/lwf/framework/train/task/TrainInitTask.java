@@ -1,6 +1,7 @@
 package cn.lwf.framework.train.task;
 
 import cn.lwf.framework.train.service.TrainFahrplanService;
+import cn.lwf.framework.train.service.TrainFileService;
 import cn.lwf.framework.train.service.TrainService;
 import cn.lwf.framework.train.service.TrainStationService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,9 @@ public class TrainInitTask{
 	@Autowired
 	TrainFahrplanService trainFahrplanService;
 
+	@Autowired
+	private TrainFileService trainFileService;
+
 	/**
 	 *  version：1.0版本,2019.12
 	 *  TO:项目启动执行一次，每次js执行只拉取30天数据（获取旧车次列表信息）
@@ -46,10 +50,17 @@ public class TrainInitTask{
 	@PostConstruct
     public void initTrainStation() {
         log.info("执行全路客运车站信息数据 - start");
-//        trainStationService.analysisStationInfo();
-		trainFahrplanService.autoSyncTrainFahrplan();
+   //     trainStationService.analysisStationInfo();
+//		trainFahrplanService.autoSyncTrainFahrplan();
         log.info("执行全路客运车站信息数据 - end");
-    }
+
+		try {
+			trainFileService.generateExcel();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	/**
 	 *  version：2.0版本,2020.08
@@ -61,9 +72,9 @@ public class TrainInitTask{
 	 public void syncEverydayTrainList() {
          log.info("每天执行车次列表数据更新 - start");
 	 	 //1、同步今日车次
-		 trainService.syncTrainListByStation();
+	//	 trainService.syncTrainListByStation();
          //2、更新完，同步车次时刻信息
-		 trainFahrplanService.autoSyncTrainFahrplan();
+//		 trainFahrplanService.autoSyncTrainFahrplan();
          log.info("每天执行车次列表数据更新 - end");
 	 }
 

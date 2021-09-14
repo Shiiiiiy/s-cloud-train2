@@ -16,4 +16,9 @@ public class SCloudTrainApplication {
         log.info("启动Spring boot服务成功");
     }
 
+
+
+
+
+
 }

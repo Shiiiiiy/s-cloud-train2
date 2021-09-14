@@ -17,6 +17,11 @@ public class TrainFahrplanDao {
         return trainFahrplanMapper.findFahrplanList();
     }
 
+
+    public List<TrainFahrplan> findList() {
+        return trainFahrplanMapper.findList();
+    }
+
     public TrainFahrplan findFahrplanByCode(String trainCode) {
         return trainFahrplanMapper.findFahrplanByCode(trainCode);
     }
